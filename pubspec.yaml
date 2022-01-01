@@ -41,8 +41,8 @@ dependencies:
   share_plus: ^3.0.4
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#  flutter_test:
+#    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -63,9 +63,16 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/wof.gif
+    - assets/one.gif
+    - assets/fire.gif
+    - assets/bonus1.gif
+    - assets/fire1.gif
+    - assets/slot.gif
+    - assets/slot1.gif
+    - assets/wheel1.gif
+    - assets/wof1.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

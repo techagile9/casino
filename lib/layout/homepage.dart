@@ -5,6 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+typedef buttonCallback = void Function();
+typedef ActionCallback = void Function(ActionType type);
+enum ActionType {
+  claim,
+  share,
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,37 +27,78 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Coupons"),
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.blue,
+              Colors.purple,
+            ],
+          )
       ),
-      body: FutureBuilder<CouponListModel>(
-        future: Services.callCodeListApi(),
-        builder: (context, snapshot) {
-          List<Data>? couponList = snapshot.data?.data;
-          if (snapshot.hasData) {
-            return RefreshIndicator(
-              onRefresh: Services.callCodeListApi,
-              child: ListView.builder(
-                padding: const EdgeInsets.all(15),
-                itemCount: couponList?.length ?? 0,
-                itemBuilder: (context, index) {
-                  Data singleCoupon = couponList![index];
-                  return GestureDetector(
-                    onTap: () => _handleClaimClickEvent(singleCoupon),
-                    child: CardAdapter(
-                      data: singleCoupon,
-                    ),
-                  );
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: [
+            Container(
+                width: double.infinity,
+                height: 80,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Colors.blueGrey,
+                        Colors.purple,
+                      ],
+                    )
+                ),
+                child: const Text("Coupons",style: TextStyle(color: Colors.white,fontSize: 20),)),
+            Expanded(
+              child: FutureBuilder<CouponListModel>(
+                future: Services.callCodeListApi(),
+                builder: (context, snapshot) {
+                  List<Data>? couponList = snapshot.data?.data;
+                  if (snapshot.hasData) {
+                    return RefreshIndicator(
+                      onRefresh: Services.callCodeListApi,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(15),
+                        itemCount: couponList?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          Data singleCoupon = couponList![index];
+                          return CardAdapter(
+                            actionCallback: (type){
+                              if(type==ActionType.claim){
+                                print('claimed');
+                                _handleClaimClickEvent(singleCoupon);
+                              }else{
+                                Share.share('Hey, I\'m sharing this coupon with you. click ${singleCoupon.link}');
+                              }
+                            },
+                            data: singleCoupon,
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return  Center(
+                      child: Image.asset(
+                        "assets/wheel1.gif",
+                        height: 100,
+                        width: 100,
+                      ),
+                    );
+                  }
                 },
               ),
-            );
-          } else {
-            return const Center(
-              child: CupertinoActivityIndicator(animating: true),
-            );
-          }
-        },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -91,7 +139,8 @@ class _HomePageState extends State<HomePage> {
 
 class CardAdapter extends StatelessWidget {
   final Data data;
-  const CardAdapter({Key? key, required this.data}) : super(key: key);
+  ActionCallback actionCallback;
+   CardAdapter({Key? key, required this.data,required this.actionCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,24 +155,39 @@ class CardAdapter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(data.title!),
-          Text('${data.claimCount!} people claimed'),
-          Text(data.createdAt!),
+          Text(data.title!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+          SizedBox(height: 5,),
+          Text('${data.claimCount!} people claimed',
+              style: TextStyle(fontSize: 15),),
+          SizedBox(height: 10,),
+          Text(data.createdAt!,style: TextStyle(fontSize: 17),),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextButton(
-                  onPressed: null,
+              /*TextButton(
+                  onPressed: (){
+                    actionCallback(ActionType.claim);
+                  },
+                  child: Text(
+                    data.claimText,
+                    style: TextStyle(color: data.claimTextColor),
+                  )),*/
+              ElevatedButton(
+                  onPressed: (){
+                    actionCallback(ActionType.claim);
+                  },
+                  style:ElevatedButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                    primary: data.claimButtonColor,
+                  ),
                   child: Text(
                     data.claimText,
                     style: TextStyle(color: data.claimTextColor),
                   )),
-              TextButton(
-                  onPressed: () {
-                    Share.share(
-                        'Hey, I\'m sharing this coupon with you. click ${data.link}');
-                  },
-                  child: const Text('Share')),
+              ElevatedButton(
+                  onPressed: ()=>actionCallback(ActionType.share),
+                  style:ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
+                  child: Text('Share')),
             ],
           )
         ],

@@ -60,7 +60,8 @@ class Data {
   int? isClaim;
 
   String get claimText => isClaim == 1 ? 'Claimed' : 'Claim';
-  Color get claimTextColor => isClaim == 1 ? Colors.grey : Colors.green;
+  Color get claimTextColor => isClaim == 1 ? Colors.black : Colors.white;
+  Color get claimButtonColor => isClaim == 1 ? Colors.deepPurple : Colors.purple;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

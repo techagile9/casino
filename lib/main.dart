@@ -1,4 +1,5 @@
 import 'package:casinocoin/layout/homepage.dart';
+import 'package:casinocoin/layout/splash_screen.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,11 +21,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Casino',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }
