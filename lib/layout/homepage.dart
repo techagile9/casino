@@ -12,7 +12,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:native_admob_flutter/native_admob_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:after_layout/after_layout.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -293,14 +292,16 @@ class _CardAdapterState extends State<CardAdapter> {
           SizedBox(
             height: 5.h,
           ),
-          // Text('${data.claimCount!} people claimed',
-          //     style: const TextStyle(fontSize: 15),),
+          Text(
+            '${widget.data.claimCount!} people claimed',
+            style: const TextStyle(fontSize: 16),
+          ),
           SizedBox(
             height: 10.h,
           ),
           Text(
             widget.data.createdAt!,
-            style: const TextStyle(fontSize: 17),
+            style: const TextStyle(fontSize: 15),
           ),
           SizedBox(
             height: 10.h,
@@ -310,7 +311,6 @@ class _CardAdapterState extends State<CardAdapter> {
             NativeAdWidget1(controller: controller),
           if (Services.appManager.showBannerAdsInListAdapter)
             const BannerAdWidget1(adPosition: AdPosition.list),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
