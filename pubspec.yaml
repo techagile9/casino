@@ -43,6 +43,7 @@ dependencies:
   flutter_beautiful_popup: ^1.7.0
   easy_ads_flutter: ^0.4.0
   native_admob_flutter: ^1.5.0
+  after_layout: ^1.1.0
 
 dev_dependencies:
 #  flutter_test:

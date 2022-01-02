@@ -32,9 +32,8 @@ class Services {
 
     if (res.statusCode == 200) {
       AppManagerModel data = AppManagerModel.fromJson(res.data);
-      // _showAds = data.data!.showAds ?? true;
+      _showAds = data.data!.showAds ?? true;
       _appManagerModel = data.data!;
-      _showAds = true;
 
       if (_showAds) {
         const IAdIdManager easyAdManager = EasyAdManager();
@@ -64,14 +63,15 @@ class Services {
   }
 
   static loadFullScreenAd() {
-    if (_showAds) {
+    if (_showAds &&
+        (_appManagerModel.showInterstitialAd ||
+            _appManagerModel.showRewardedAd)) {
       EasyAds.instance.loadAd(adNetwork: AdNetwork.admob);
     }
   }
 
   static showFullScreenAd({required AdUnitType type, required bool showAds}) {
     if (_showAds && showAds) {
-      print('full screen ad');
       EasyAds.instance.showAd(type, adNetwork: AdNetwork.admob);
     }
   }

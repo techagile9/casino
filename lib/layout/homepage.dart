@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:native_admob_flutter/native_admob_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:after_layout/after_layout.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,26 +21,29 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   final controller = NativeAdController();
 
   @override
   void initState() {
     super.initState();
-    controller.load();
-    // controller.onEvent.listen((event) {
-    //   setState(() {});
-    // });
-    Services.showAppOpenAd();
+
+    if (Services.showAds &&
+        (Services.appManager.showBottomNativeAd ||
+            Services.appManager.showNativeAdsInListAdapter)) {
+      controller.load();
+      controller.onEvent.listen((event) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
     Services.loadFullScreenAd();
   }
 
   @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
+  bool get wantKeepAlive => true;
 
   @override
   void dispose() {
@@ -49,6 +53,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -119,7 +124,14 @@ class _HomePageState extends State<HomePage> {
                                     type: AdUnitType.rewarded,
                                     showAds:
                                         Services.appManager.showRewardedAd);
-                                Future.delayed(const Duration(seconds: 2), () {
+                                Future.delayed(
+                                    Duration(
+                                        seconds:
+                                            (Services.appManager.showAds! &&
+                                                    Services.appManager
+                                                        .showRewardedAd)
+                                                ? 3
+                                                : 0), () {
                                   Share.share(
                                       'Hey, I\'m sharing this coupon with you. click ${singleCoupon.link}');
                                 });
@@ -205,15 +217,19 @@ class _HomePageState extends State<HomePage> {
                             'Something went wrong. please try again later')));
                   }
                   await Services.claimCodeApi(couponData.id!).then((value) {
-                    setState(() {});
+                    if (mounted) {
+                      setState(() {});
+                    }
                   });
                 }
               },
               color: Colors.orange,
               title: 'Redeem')
         ],
-        content: const Text(
-            'Redeem button will redirect you to game and you will get coins. Enjoy and come back tomorrow to get new coins.',
+        content: Text(
+            couponData.isClaim != 1
+                ? 'Redeem button will redirect you to game and you will get coins. Enjoy and come back tomorrow to get new coins.'
+                : 'You have already redeemed this coupon. Please come back tomorrow.',
             textAlign: TextAlign.center));
   }
 }
@@ -235,10 +251,17 @@ class _CardAdapterState extends State<CardAdapter> {
   @override
   void initState() {
     super.initState();
-    controller.load();
-    controller.onEvent.listen((event) {
-      setState(() {});
-    });
+
+    if (Services.showAds &&
+        (Services.appManager.showBottomNativeAd ||
+            Services.appManager.showNativeAdsInListAdapter)) {
+      controller.load();
+      controller.onEvent.listen((event) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
   }
 
   @override

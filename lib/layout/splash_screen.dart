@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:casinocoin/layout/homepage.dart';
+import 'package:casinocoin/service/services.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,10 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
+  void dispose() {
+    super.dispose();
+    Services.showAppOpenAd();
   }
 
   @override
