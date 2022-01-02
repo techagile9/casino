@@ -39,6 +39,7 @@ dependencies:
   device_info: ^2.0.3
   shared_preferences: ^2.0.11
   share_plus: ^3.0.4
+  flutter_screenutil: ^5.0.2
 
 dev_dependencies:
 #  flutter_test:
@@ -64,15 +65,18 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/wof.gif
-    - assets/one.gif
-    - assets/fire.gif
     - assets/bonus1.gif
     - assets/fire1.gif
     - assets/slot.gif
     - assets/slot1.gif
     - assets/wheel1.gif
     - assets/wof1.gif
+    - assets/left2.gif
+    - assets/left3.gif
+    - assets/right2.gif
+    - assets/right3.gif
+    - assets/share2.gif
+    - assets/drawer1.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

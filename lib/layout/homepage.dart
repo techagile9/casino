@@ -1,16 +1,11 @@
 import 'package:casinocoin/models/coupon_list_model.dart';
 import 'package:casinocoin/service/services.dart';
+import 'package:casinocoin/utils/enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-typedef buttonCallback = void Function();
-typedef ActionCallback = void Function(ActionType type);
-enum ActionType {
-  claim,
-  share,
-}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             end: Alignment.bottomLeft,
             colors: [
               Colors.blue,
+              Colors.white,
               Colors.purple,
             ],
           )
@@ -44,19 +40,33 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
                 width: double.infinity,
-                height: 80,
+                height: 80.h,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
-                        Colors.blueGrey,
                         Colors.purple,
+                        Colors.white,
+                        Colors.blue,
                       ],
                     )
                 ),
-                child: const Text("Coupons",style: TextStyle(color: Colors.white,fontSize: 20),)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  [
+                    Image.asset("assets/left3.gif", height: 30.h,),
+                    Image.asset("assets/left3.gif", height: 30.h,
+                    ),
+                    const Text(
+                      "Coupons",
+                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Image.asset("assets/right3.gif", height: 30.h,),
+                    Image.asset("assets/right3.gif", height: 30.h,),
+                  ],
+                )),
             Expanded(
               child: FutureBuilder<CouponListModel>(
                 future: Services.callCodeListApi(),
@@ -67,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       onRefresh: Services.callCodeListApi,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        padding: const EdgeInsets.all(15),
+                        padding: EdgeInsets.all(15.w),
                         itemCount: couponList?.length ?? 0,
                         itemBuilder: (context, index) {
                           Data singleCoupon = couponList![index];
@@ -89,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                     return  Center(
                       child: Image.asset(
                         "assets/wheel1.gif",
-                        height: 100,
-                        width: 100,
+                        height: 100.w,
+                        width: 100.w,
                       ),
                     );
                   }
@@ -145,49 +155,74 @@ class CardAdapter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(bottom: 10),
+      padding:  EdgeInsets.symmetric(vertical: 10.w,horizontal: 10.w),
+      margin:  EdgeInsets.only(bottom: 10.h),
       decoration: BoxDecoration(
           boxShadow: kElevationToShadow[1],
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.purple,
+              Colors.white,
+              Colors.blue,
+            ],
+          ),
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(data.title!,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          SizedBox(height: 5,),
-          Text('${data.claimCount!} people claimed',
-              style: TextStyle(fontSize: 15),),
-          SizedBox(height: 10,),
-          Text(data.createdAt!,style: TextStyle(fontSize: 17),),
+          Text(data.title!,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+          SizedBox(height: 5.h,),
+          // Text('${data.claimCount!} people claimed',
+          //     style: const TextStyle(fontSize: 15),),
+          SizedBox(height: 10.h,),
+          Text(data.createdAt!,style: const TextStyle(fontSize: 17),),
+          SizedBox(height: 10.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              /*TextButton(
-                  onPressed: (){
-                    actionCallback(ActionType.claim);
-                  },
-                  child: Text(
-                    data.claimText,
-                    style: TextStyle(color: data.claimTextColor),
-                  )),*/
-              ElevatedButton(
-                  onPressed: (){
-                    actionCallback(ActionType.claim);
-                  },
-                  style:ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                    primary: data.claimButtonColor,
+              Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: (){
+                        actionCallback(ActionType.claim);
+                      },
+                      style:ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20),
+                        primary: data.claimButtonColor,
+                      ),
+                      child: Text(
+                        data.claimText,
+                        style: TextStyle(color: data.claimTextColor),
+                      )),
+                  SizedBox(width: 5.w,),
+                  Visibility(
+                    visible: data.claimButtonColor==Colors.blue,
+                    child: Image.asset(
+                      "assets/left2.gif",
+                      height: 30.h,
+                    ),
                   ),
-                  child: Text(
-                    data.claimText,
-                    style: TextStyle(color: data.claimTextColor),
-                  )),
-              ElevatedButton(
-                  onPressed: ()=>actionCallback(ActionType.share),
-                  style:ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
-                  child: Text('Share')),
+                ],
+              ),
+
+              GestureDetector(
+                onTap: (){
+                  actionCallback(ActionType.share);
+                },
+                child: Column(
+                  children: [
+                    Text('Share'),
+                    Image.asset(
+                      "assets/share2.gif",
+                      height: 30.h,
+                    ),
+                  ],
+                ),
+              ),
             ],
           )
         ],
