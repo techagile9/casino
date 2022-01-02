@@ -40,6 +40,9 @@ dependencies:
   shared_preferences: ^2.0.11
   share_plus: ^3.0.4
   flutter_screenutil: ^5.0.2
+  flutter_beautiful_popup: ^1.7.0
+  easy_ads_flutter: ^0.4.0
+  native_admob_flutter: ^1.5.0
 
 dev_dependencies:
 #  flutter_test:
@@ -77,6 +80,7 @@ flutter:
     - assets/right3.gif
     - assets/share2.gif
     - assets/drawer1.gif
+    - assets/coin_bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
