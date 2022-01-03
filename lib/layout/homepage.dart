@@ -1,3 +1,4 @@
+import 'package:casinocoin/layout/custome_drawer.dart';
 import 'package:casinocoin/models/coupon_list_model.dart';
 import 'package:casinocoin/service/services.dart';
 import 'package:casinocoin/utils/ad_widget.dart';
@@ -23,6 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   final controller = NativeAdController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -65,15 +67,17 @@ class _HomePageState extends State<HomePage>
         ],
       )),
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.transparent,
+        drawer: const CustomerLeftDrawer(),
         body: Column(
           children: [
             Container(
                 padding:
                     EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 width: double.infinity,
-                height: 80.h,
-                alignment: Alignment.center,
+                height: 70.h,
+                alignment: Alignment.bottomCenter,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topRight,
@@ -85,19 +89,30 @@ class _HomePageState extends State<HomePage>
                   ],
                 )),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset("assets/left3.gif", height: 30.h),
-                    Image.asset("assets/left3.gif", height: 30.h),
-                    const Text(
-                      "Coupons",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    SizedBox(width: 15.w,),
+                    GestureDetector(
+                      onTap: (){
+                        _scaffoldKey.currentState!.openDrawer();
+                      },
+                        child: Image.asset("assets/drawer1.gif", height: 30.h,)
                     ),
-                    Image.asset("assets/right3.gif", height: 30.h),
-                    Image.asset("assets/right3.gif", height: 30.h),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Image.asset("assets/left3.gif", height: 30.h,),
+                          Image.asset("assets/left3.gif", height: 30.h,
+                          ),
+                          const Text(
+                            "Coupons",
+                            style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Image.asset("assets/right3.gif", height: 30.h,),
+                          Image.asset("assets/right3.gif", height: 30.h,),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
             Expanded(
