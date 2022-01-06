@@ -82,6 +82,8 @@ flutter:
     - assets/share2.gif
     - assets/drawer1.gif
     - assets/coin_bg.png
+    - assets/casino.jpg
+    - assets/emoji2.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

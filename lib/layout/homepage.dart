@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   final controller = NativeAdController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -57,15 +57,8 @@ class _HomePageState extends State<HomePage>
     super.build(context);
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          Colors.blue,
-          Colors.white,
-          Colors.purple,
-        ],
-      )),
+       color: Colors.purpleAccent
+      ),
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.transparent,
@@ -77,15 +70,14 @@ class _HomePageState extends State<HomePage>
                     EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 width: double.infinity,
                 height: 70.h,
-                alignment: Alignment.bottomCenter,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
+                  end: Alignment.topLeft,
                   colors: [
-                    Colors.purple,
+                    Colors.purpleAccent,
                     Colors.white,
-                    Colors.blue,
+                    Colors.purpleAccent,
                   ],
                 )),
                 child: Row(
@@ -95,7 +87,7 @@ class _HomePageState extends State<HomePage>
                       onTap: (){
                         _scaffoldKey.currentState!.openDrawer();
                       },
-                        child: Image.asset("assets/drawer1.gif", height: 30.h,)
+                        child: Image.asset("assets/drawer1.gif", height: 35.h,color: Colors.white,)
                     ),
                     Expanded(
                       child: Row(
@@ -105,7 +97,7 @@ class _HomePageState extends State<HomePage>
                           Image.asset("assets/left3.gif", height: 30.h,
                           ),
                           const Text(
-                            "Coupons",
+                            "Free Chips",
                             style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Image.asset("assets/right3.gif", height: 30.h,),
@@ -113,6 +105,7 @@ class _HomePageState extends State<HomePage>
                         ],
                       ),
                     ),
+                    SizedBox(width: 50.w,),
                   ],
                 )),
             Expanded(
@@ -290,9 +283,11 @@ class _CardAdapterState extends State<CardAdapter> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.purple,
+            // Colors.purple,
             Colors.white,
-            Colors.blue,
+            Colors.white,
+            Colors.white,
+            // Colors.blue,
           ],
         ),
       ),

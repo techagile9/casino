@@ -18,125 +18,95 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
-        // Scaffold.of(context).openEndDrawer();
       },
       child: Scaffold(
         key: _key,
         backgroundColor: Colors.transparent,
         body: Drawer(
+          backgroundColor: Colors.purpleAccent,
           child: Container(
             padding: EdgeInsets.only(
-                left: 30.w,
                 top: 60.h
             ),
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                Row(
-                     children: [
-                       Container(
-                         margin: EdgeInsets.only(right: 15.w),
-                         decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(5),
-                             border: Border.all(color: Colors.black),
-                         ),
-                         child: Container(
-                           height: 60.w,
-                           width: 60.w,
-                           margin: const EdgeInsets.all(3),
-                           // decoration: BoxDecoration(
-                           //   borderRadius: BorderRadius.circular(5),
-                           //   image: DecorationImage(
-                           //       fit: BoxFit.fill,
-                           //     image: AssetImage(AppImage.download1)
-                           //   )
-                           // ),
-                           // child:  ImageWidget(
-                           //     placeholder: AppImage.placeholder2,
-                           //     url: ApiConstant.baseProfileImageDomain+User.currentUser.profile!,
-                           //   )
-                         ),
-                       ),
-                       const Text(
-                           'User.currentUser.fullName',
-                       ),
-                     ],
-                   ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30.h,bottom: 30.h),
-                  child: Divider(color: Colors.black),
-                ),
-
-                GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openEndDrawer();
-                      // Navigator.pushNamed(context, RouteName.yourProfileScreen);
-                  },
-                  child: const Text(
-                    'Translations.of(context).strYourProfile',
-                  ),
-                ),
-                SizedBox(height: 23.h,),
-
-                GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openEndDrawer();
-                    // Navigator.pushNamed(context, RouteName.yourBalanceScreen);
-                  },
-                  child: const Text(
-                    'Translations.of(context).strYourBalance',
-                  ),
-                ),
-                SizedBox(height: 23.h,),
-
-                GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openEndDrawer();
-                    // Navigator.pushNamed(context, RouteName.paymentScreen);
-                  },
-                  child: const Text(
-                    'Translations.of(context).strPaymentMethod',
-                  ),
-                ),
-                SizedBox(height: 23.h,),
-
-                GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openEndDrawer();
-                    // Navigator.pushNamed(context, RouteName.connectWithUsScreen);
-                  },
-                  child: const Text(
-                    'Translations.of(context).strConnectWithUs',
-                  ),
-                ),
-                SizedBox(height: 23.h,),
-
-                GestureDetector(
-                  onTap: (){
-
-                    // Navigator.pushNamedAndRemoveUntil(
-                    //   context, RouteName.signUpNumberScreen, (route) => false,
-                    // ).then((value) {
-                    //   User.currentUser.resetUserDetail();
-                    // });
-                  },
-                  child: const Text(
-                    'Translations.of(context).strLogout',
-                  ),
-                ),
-                SizedBox(height: 23.h,),
-                GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openEndDrawer();
-                    // Navigator.pushNamed(context, RouteName.deleteAccountScreen);
-                  },
-                  child: Text(
-                    'Translations.of(context).strDeleteAccount',
-                  ),
+                  padding: EdgeInsets.only(left: 20.h),
+                  child: Row(
+                       children: [
+                         Container(
+                           margin: EdgeInsets.only(right: 15.w),
+                           decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(5),
+                               border: Border.all(color: Colors.white),
+                           ),
+                           child: Container(
+                             height: 60.w,
+                             width: 60.w,
+                             margin: const EdgeInsets.all(3),
+                             decoration: BoxDecoration(
+                                 color: Colors.white,
+                               borderRadius: BorderRadius.circular(5),
+                               image: const DecorationImage(
+                                   fit: BoxFit.fill,
+                                 image: AssetImage("assets/casino.jpg")
+                               )
+                             ),
+                           ),
+                         ),
+                          Text('Get More Free Chips',style: commonStyle,),
+                       ],
+                     ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 26.h,bottom: 44.h),
-                  child: Divider(color: Colors.black,),
+                  padding: EdgeInsets.only(top: 30.h),
+                  child: const Divider(color: Colors.white),
+                ),
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                     ListTile(
+                      onTap: (){
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      leading: const Icon(Icons.home,color: Colors.white,),
+                      title:  Text('Home',style: commonStyle,),
+                    ),
+
+                    ListTile(
+                      onTap: (){
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      leading: const Icon(Icons.share,color: Colors.white),
+                      title: Text('Share app',style: commonStyle,),
+                    ),
+
+                    ListTile(
+                      onTap: (){
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      leading: const Icon(Icons.mood_rounded,color: Colors.white),
+                      title: Text('More app',style: commonStyle,),
+                      trailing: Image.asset("assets/emoji2.gif", height: 35.h,),
+                    ),
+
+                    ListTile(
+                      onTap: (){
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      leading: const Icon(Icons.star_rate,color: Colors.white),
+                      title:  Text('Rate',style: commonStyle,),
+                    ),
+
+                  ],
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 44.h),
+                  child: const Divider(color: Colors.white,),
                 ),
 
               ],
@@ -146,6 +116,7 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
       ),
     );
   }
+  TextStyle commonStyle=const TextStyle(color: Colors.white,fontSize: 18);
 
   /*_handleEditProfile() {
     /// Close Drawer
