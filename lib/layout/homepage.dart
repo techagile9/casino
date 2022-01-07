@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   final controller = NativeAdController();
-  final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -56,9 +56,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Container(
-      decoration: const BoxDecoration(
-       color: Colors.purpleAccent
-      ),
+      decoration: const BoxDecoration(color: Colors.purpleAccent),
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.transparent,
@@ -82,30 +80,51 @@ class _HomePageState extends State<HomePage>
                 )),
                 child: Row(
                   children: [
-                    SizedBox(width: 15.w,),
-                    GestureDetector(
-                      onTap: (){
-                        _scaffoldKey.currentState!.openDrawer();
-                      },
-                        child: Image.asset("assets/drawer1.gif", height: 35.h,color: Colors.white,)
+                    SizedBox(
+                      width: 15.w,
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          _scaffoldKey.currentState!.openDrawer();
+                        },
+                        child: Image.asset(
+                          "assets/drawer1.gif",
+                          height: 35.h,
+                          color: Colors.white,
+                        )),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:  [
-                          Image.asset("assets/left3.gif", height: 30.h,),
-                          Image.asset("assets/left3.gif", height: 30.h,
+                        children: [
+                          Image.asset(
+                            "assets/left3.gif",
+                            height: 30.h,
+                          ),
+                          Image.asset(
+                            "assets/left3.gif",
+                            height: 30.h,
                           ),
                           const Text(
                             "Free Chips",
-                            style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                          Image.asset("assets/right3.gif", height: 30.h,),
-                          Image.asset("assets/right3.gif", height: 30.h,),
+                          Image.asset(
+                            "assets/right3.gif",
+                            height: 30.h,
+                          ),
+                          Image.asset(
+                            "assets/right3.gif",
+                            height: 30.h,
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 50.w,),
+                    SizedBox(
+                      width: 50.w,
+                    ),
                   ],
                 )),
             Expanded(
@@ -207,8 +226,7 @@ class _HomePageState extends State<HomePage>
 
   _handleClaimClickEvent(Data couponData) async {
     Services.showFullScreenAd(
-        type: AdUnitType.interstitial,
-        showAds: Services.appManager.showInterstitialAd);
+        type: AdUnitType.rewarded, showAds: Services.appManager.showRewardedAd);
     BeautifulPopup(
       context: context,
       template: TemplateCoin,
@@ -302,10 +320,10 @@ class _CardAdapterState extends State<CardAdapter> {
           SizedBox(
             height: 5.h,
           ),
-          Text(
-            '${widget.data.claimCount!} people claimed',
-            style: const TextStyle(fontSize: 16),
-          ),
+          // Text(
+          //   '${widget.data.claimCount!} people claimed',
+          //   style: const TextStyle(fontSize: 16),
+          // ),
           SizedBox(
             height: 10.h,
           ),
