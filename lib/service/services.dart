@@ -38,6 +38,7 @@ class Services {
       if (_showAds) {
         const IAdIdManager easyAdManager = EasyAdManager();
 
+
         await nad.MobileAds.initialize(
             appOpenAdUnitId: data.data!.appOpen,
             nativeAdUnitId: data.data!.native,
