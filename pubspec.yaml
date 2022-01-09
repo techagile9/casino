@@ -44,6 +44,9 @@ dependencies:
   easy_ads_flutter: ^0.4.0
   native_admob_flutter: ^1.5.0
   after_layout: ^1.1.0
+  firebase_messaging: ^11.2.4
+  firebase_core: ^1.10.6
+  firebase_analytics: ^9.0.4
 
 dev_dependencies:
 #  flutter_test:

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "181080117652",
+    "project_id": "casino-coins-daily",
+    "storage_bucket": "casino-coins-daily.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181080117652:android:652d6d3c11076007e07f81",
+        "android_client_info": {
+          "package_name": "app.casinocoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181080117652-lhb4gpsdjn2jcf18b0ii3uhhgv2n4nnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.casinocoin",
+            "certificate_hash": "eb8e35ad8b6db2593351d390dac6f3b1b1d9341e"
+          }
+        },
+        {
+          "client_id": "181080117652-219l3assial94e80hjsq95mvbju3c3aj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEXn9cXSIPQbNI5gH_e1h970VV6PKxpy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181080117652-219l3assial94e80hjsq95mvbju3c3aj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

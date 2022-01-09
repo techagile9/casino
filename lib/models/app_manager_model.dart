@@ -17,25 +17,6 @@ class AppManagerModel {
   }
 }
 
-/// id : 53
-/// created_at : "2021-12-18T03:38:48.234303+00:00"
-/// app_package : "app.free_food"
-/// interstitial : "/6499/example/interstitial"
-/// banner : "/6499/example/banner"
-/// native : ""
-/// app_open : "/6499/example/app-open"
-/// new_app_package : "com.amanotes.beathopper"
-/// show_ads : false
-/// rewarded : ""
-/// current_app_version : 1
-/// app_email : "nikhilvala269@gmail.com"
-/// privacy_policy_url : "https://www.termsfeed.com/live/92fbfbe7-942c-4e41-a24e-95948136f9fc"
-/// terms_of_service_url : "https://www.termsfeed.com/live/92fbfbe7-942c-4e41-a24e-95948136f9fc"
-/// extras : ""
-/// rewarded_interstitial : ""
-/// app_name : "Free Food"
-/// isDeleted : false
-
 class AppData {
   AppData({
     this.id,

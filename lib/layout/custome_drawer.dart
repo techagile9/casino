@@ -1,4 +1,5 @@
 import 'package:casinocoin/service/services.dart';
+import 'package:casinocoin/service/strings.dart';
 import 'package:casinocoin/utils/ad_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,6 +85,8 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
                     ListTile(
                       onTap: () {
                         Scaffold.of(context).openEndDrawer();
+                        Share.share(
+                            'Download this free coins app now. click ${Strings.getAppUrl}');
                       },
                       leading: const Icon(Icons.share, color: Colors.white),
                       title: Text(
@@ -93,12 +96,12 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
                     ),
                     ListTile(
                       onTap: () {
-                        Scaffold.of(context).openEndDrawer();
+                        Services().openAppStore(package: AppPackage.newPackage);
                       },
                       leading:
                           const Icon(Icons.mood_rounded, color: Colors.white),
                       title: Text(
-                        'More app',
+                        'More apps',
                         style: commonStyle,
                       ),
                       trailing: Image.asset(
@@ -108,7 +111,19 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
                     ),
                     ListTile(
                       onTap: () {
+                        Services().openPrivacyPage();
+                      },
+                      leading: const Icon(Icons.policy, color: Colors.white),
+                      title: Text(
+                        'Privacy Policy',
+                        style: commonStyle,
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {
                         Scaffold.of(context).openEndDrawer();
+                        Services()
+                            .openAppStore(package: AppPackage.currentPackage);
                       },
                       leading: const Icon(Icons.star_rate, color: Colors.white),
                       title: Text(
@@ -142,7 +157,4 @@ class _CustomerLeftDrawerState extends State<CustomerLeftDrawer> {
     // Navigator.pushNamed(context, RouteName.editProfileCustomer);
   }*/
 
-  _handleShareEvent() {
-    Share.share('check out this amazing app. Download now ${''}');
-  }
 }

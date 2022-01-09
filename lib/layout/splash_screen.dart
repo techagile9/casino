@@ -25,16 +25,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-        const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => const HomePage())));
+    if (!Services.isAppUpdateRequired) {
+      Timer(
+          const Duration(seconds: 2),
+          () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => const HomePage())));
+    } else {
+      Timer(const Duration(seconds: 2), () async {
+        await Services().openAppStore(package: AppPackage.newPackage);
+      });
+    }
 
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          "assets/wof1.gif",
-        ),
+        child: !Services.isAppUpdateRequired
+            ? Image.asset(
+                "assets/wof1.gif",
+              )
+            : const Text(
+                'Taking you to the Google Play..',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
       ),
     );
   }

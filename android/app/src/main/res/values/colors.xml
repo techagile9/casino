@@ -2,4 +2,5 @@
 <resources>
     <!-- Insert your background color for the splash screen -->
     <color name="background">#fff</color>
+        <color name="red">#FF0000</color>
 </resources>
